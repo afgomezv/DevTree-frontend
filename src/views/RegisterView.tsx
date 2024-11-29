@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { Button, Input } from "@nextui-org/react";
 import { isAxiosError } from "axios";
-import { Input } from "@nextui-org/react";
 import { toast } from "sonner";
+
 import api from "../config/axios";
-import type { RegisterFrom } from "../types";
+import type { RegisterForm } from "../types";
 
 export default function RegisterView() {
   const {
@@ -13,11 +14,11 @@ export default function RegisterView() {
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterFrom>();
+  } = useForm<RegisterForm>();
 
   const password = watch("password");
 
-  const handleRegister = async (formData: RegisterFrom) => {
+  const handleRegister = async (formData: RegisterForm) => {
     try {
       const { data } = await api.post(`/auth/register`, formData);
       toast.success(data.message);
@@ -34,7 +35,7 @@ export default function RegisterView() {
       <h1 className="text-4xl text-white font-bold">Crear Cuenta</h1>
       <form
         onSubmit={handleSubmit(handleRegister)}
-        className="bg-white px-5 py-20 rounded-lg mt-10 space-y-4"
+        className="bg-white px-5 py-16 rounded-lg mt-10 space-y-4"
       >
         <Input
           isRequired
@@ -96,11 +97,13 @@ export default function RegisterView() {
               value === password || "La contraseña no coinciden",
           })}
         />
-        <input
+        <Button
           type="submit"
-          className="bg-cyan-400 p-3 text-lg w-full uppercase text-slate-600 rounded-lg font-bold cursor-pointer"
-          value="Crear Cuenta"
-        />
+          size="lg"
+          className="bg-cyan-400 p-3 text-lg w-full uppercase text-slate-700 rounded-lg font-bold cursor-pointer"
+        >
+          Crear Cuenta
+        </Button>
       </form>
       <nav className="mt-10">
         <Link to="/auth/login" className="text-center text-white block">

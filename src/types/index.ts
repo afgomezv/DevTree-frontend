@@ -5,7 +5,11 @@ export type User = {
   password: string;
 };
 
-export type RegisterFrom = Pick<User, "handle" | "email" | "name"> & {
+export type RegisterForm = Pick<User, "handle" | "email" | "name"> & {
   password: string;
   passwordConfirmation: string;
+};
+
+export type LoginForm = Pick<User, "email"> & {
+  password: string;
 };
