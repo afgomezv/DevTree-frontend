@@ -36,7 +36,7 @@ export default function LoginView() {
           isRequired
           type="email"
           label="Correo electrónico"
-          isInvalid={errors.email ? true : false}
+          isInvalid={!!errors.email}
           errorMessage={`${errors.email?.message}`}
           {...register("email", {
             required: "El correo electrónico es obligatorio",
@@ -50,7 +50,7 @@ export default function LoginView() {
           isRequired
           type="password"
           label="Contraseña"
-          isInvalid={errors.password ? true : false}
+          isInvalid={!!errors.password}
           errorMessage={`${errors.password?.message}`}
           {...register("password", {
             required: "La contraseña es obligatoria",

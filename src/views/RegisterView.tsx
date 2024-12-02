@@ -41,7 +41,7 @@ export default function RegisterView() {
           isRequired
           type="text"
           label="Nombre"
-          isInvalid={errors.name ? true : false}
+          isInvalid={!!errors.name}
           errorMessage={`${errors.name?.message}`}
           {...register("name", {
             required: "El nombre es obligatorio",
@@ -51,7 +51,7 @@ export default function RegisterView() {
           isRequired
           type="email"
           label="Correo electrónico"
-          isInvalid={errors.email ? true : false}
+          isInvalid={!!errors.email}
           errorMessage={`${errors.email?.message}`}
           {...register("email", {
             required: "El correo electrónico es obligatorio",
@@ -65,7 +65,7 @@ export default function RegisterView() {
           isRequired
           type="text"
           label="Handle"
-          isInvalid={errors.handle ? true : false}
+          isInvalid={!!errors.handle}
           errorMessage={`${errors.handle?.message}`}
           {...register("handle", {
             required: "El handle es obligatorio",
@@ -75,7 +75,7 @@ export default function RegisterView() {
           isRequired
           type="password"
           label="Contraseña"
-          isInvalid={errors.password ? true : false}
+          isInvalid={!!errors.password}
           errorMessage={`${errors.password?.message}`}
           {...register("password", {
             required: "La contraseña es obligatoria",
@@ -89,7 +89,7 @@ export default function RegisterView() {
           isRequired
           type="password"
           label="Confirmar Contraseña"
-          isInvalid={errors.passwordConfirmation ? true : false}
+          isInvalid={!!errors.passwordConfirmation}
           errorMessage={`${errors.passwordConfirmation?.message}`}
           {...register("passwordConfirmation", {
             required: "La contraseña de confirmación es obligatoria",
