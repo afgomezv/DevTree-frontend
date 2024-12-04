@@ -2,8 +2,9 @@ import { Button, Input, Textarea } from "@nextui-org/react";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { ProfileForm, User } from "../types";
-import { updateProfile } from "../api/getUser";
+import { updateProfile, uploadImage } from "../api/getUser";
 import { toast } from "sonner";
+import { ChangeEvent } from "react";
 
 export default function ProfileView() {
   const queryClient = useQueryClient();
@@ -30,6 +31,27 @@ export default function ProfileView() {
       queryClient.invalidateQueries({ queryKey: ["user"] });
     },
   });
+
+  const uploadImageMutation = useMutation({
+    mutationFn: uploadImage,
+    onError: (error) => {
+      console.log(error);
+    },
+    onSuccess: (data) => {
+      queryClient.setQueryData(["user"], (prevData: User) => {
+        return {
+          ...prevData,
+          image: data,
+        };
+      });
+    },
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      uploadImageMutation.mutate(e.target.files[0]);
+    }
+  };
 
   const handleUserProfileForm = (formData: ProfileForm) => {
     updateProfileMutation.mutate(formData);
@@ -74,7 +96,7 @@ export default function ProfileView() {
           size="lg"
           name="handle"
           accept="image/*"
-          onChange={() => {}}
+          onChange={handleChange}
         />
       </div>
 
