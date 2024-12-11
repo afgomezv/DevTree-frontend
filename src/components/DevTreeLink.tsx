@@ -1,4 +1,3 @@
-import { li } from "framer-motion/client";
 import { SocialNetwork } from "../types";
 
 type DevTreeLinkProps = {
