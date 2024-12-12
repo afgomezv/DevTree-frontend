@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { Button, link, select } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProfile } from "../api/getUser";
@@ -101,7 +101,11 @@ export default function LinkTreeView() {
             id: 0,
             enabled: false,
           };
-        } else if (link.id > indexToUpdate) {
+        } else if (
+          link.id > indexToUpdate &&
+          indexToUpdate !== 0 &&
+          link.id === 1
+        ) {
           return {
             ...link,
             id: link.id - 1,
@@ -111,8 +115,6 @@ export default function LinkTreeView() {
         }
       });
     }
-
-    console.log(updatedItems);
 
     queryClient.setQueryData(["user"], (prevData: User) => {
       return {
@@ -135,7 +137,7 @@ export default function LinkTreeView() {
         ))}
         <Button
           className="bg-cyan-400 p-2 text-lg w-full uppercase text-slate-600 rounded-lg font-bold"
-          onClick={() => mutate(user)}
+          onClick={() => mutate(queryClient.getQueryData(["user"])!)}
         >
           Guardar Cambios
         </Button>
