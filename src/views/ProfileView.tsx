@@ -1,10 +1,10 @@
+import { ChangeEvent } from "react";
 import { Button, Input, Textarea } from "@nextui-org/react";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { ProfileForm, User } from "../types";
 import { updateProfile, uploadImage } from "../api/getUser";
 import { toast } from "sonner";
-import { ChangeEvent } from "react";
 
 export default function ProfileView() {
   const queryClient = useQueryClient();

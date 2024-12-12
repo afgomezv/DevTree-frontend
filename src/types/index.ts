@@ -9,6 +9,11 @@ export type User = {
   links: string;
 };
 
+export type UserHandle = Pick<
+  User,
+  "description" | "handle" | "image" | "links" | "name"
+>;
+
 export type RegisterForm = Pick<User, "handle" | "email" | "name"> & {
   password: string;
   passwordConfirmation: string;
