@@ -13,6 +13,12 @@ export default {
         "custom-yellow": "#e0de2b",
         "custom-green": "#65b344",
       },
+      backgroundImage: {
+        home: "url(/bg.svg)",
+      },
+      backgroundSize: {
+        "home-xl": "50%",
+      },
     },
   },
   darkMode: "class",

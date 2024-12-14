@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button, Input } from "@nextui-org/react";
 import { isAxiosError } from "axios";
 import { toast } from "sonner";
@@ -8,13 +8,24 @@ import api from "../config/axios";
 import type { RegisterForm } from "../types";
 
 export default function RegisterView() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const initialValue: RegisterForm = {
+    name: "",
+    email: "",
+    handle: location?.state?.handle || "",
+    password: "",
+    passwordConfirmation: "",
+  };
+
   const {
     register,
     watch,
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterForm>();
+  } = useForm<RegisterForm>({ defaultValues: initialValue });
 
   const password = watch("password");
 
@@ -23,6 +34,7 @@ export default function RegisterView() {
       const { data } = await api.post(`/auth/register`, formData);
       toast.success(data.message);
       reset();
+      navigate(`/auth/login`);
     } catch (error) {
       if (isAxiosError(error) && error.response) {
         toast.error(error.response?.data.error);

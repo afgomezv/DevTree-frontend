@@ -2,11 +2,15 @@ import {
   Navbar as NextUINavbar,
   NavbarBrand,
   NavbarContent,
-  Button,
 } from "@nextui-org/react";
 import { Logo } from "./Logo";
+import AdminNavigation from "./nav/AdminNavigation";
+import { useLocation } from "react-router-dom";
+import HomeNavigation from "./nav/HomeNavigation";
 
 export const NavbarAccount = () => {
+  const location = useLocation();
+
   return (
     <NextUINavbar isBordered className="bg-background/70 backdrop-blur-lg py-4">
       <NavbarContent>
@@ -15,12 +19,7 @@ export const NavbarAccount = () => {
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent justify="end">
-        <Button
-          className="bg-gradient-to-tr from-custom-yellow to-custom-green text-black font-bold shadow-lg"
-          size="lg"
-        >
-          Cerrar Sessión
-        </Button>
+        {location.pathname === "/" ? <HomeNavigation /> : <AdminNavigation />}
       </NavbarContent>
     </NextUINavbar>
   );

@@ -13,11 +13,6 @@ export const Navbar = () => {
           <Logo />
         </NavbarBrand>
       </NavbarContent>
-      {/* <NavbarContent justify="end">
-        <NavbarItem>
-          <AuthButtons />
-        </NavbarItem>
-      </NavbarContent> */}
     </NextUINavbar>
   );
 };

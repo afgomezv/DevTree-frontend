@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button, Input } from "@nextui-org/react";
 import { isAxiosError } from "axios";
 import { toast } from "sonner";
@@ -8,6 +8,8 @@ import api from "../config/axios";
 import { LoginForm } from "../types";
 
 export default function LoginView() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -18,6 +20,7 @@ export default function LoginView() {
     try {
       const { data } = await api.post(`/auth/login`, formData);
       localStorage.setItem("AUTH_TOKEN", data.message);
+      navigate("/admin");
     } catch (error) {
       if (isAxiosError(error) && error.response) {
         toast.error(error.response?.data.error);

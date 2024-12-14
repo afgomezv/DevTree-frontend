@@ -10,7 +10,7 @@ export default function AuthLayout() {
         <div className="max-w-lg mx-auto pt-10 px-5">
           <div className="py-10">
             <Outlet />
-            <Toaster className="mt-12" richColors position="top-right" />
+            <Toaster className="mt-20" richColors position="top-right" />
           </div>
         </div>
       </div>
